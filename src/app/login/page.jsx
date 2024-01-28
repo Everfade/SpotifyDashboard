@@ -37,6 +37,7 @@ const Login = () => {
     const redirectUri = "http://localhost:3000/login";
     const scopes = [
       "user-read-private",
+      "user-top-read",
       "user-read-email",
       // Add other scopes as needed
     ];
