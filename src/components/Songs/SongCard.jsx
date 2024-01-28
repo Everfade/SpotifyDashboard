@@ -1,6 +1,6 @@
 import React from "react";
 
-const SongCard = ({ song }) => {
+const SongCard = ({rank, song }) => {
   // Join all artist names into a single string
   const artistNames = song.artists.map(artist => artist.name).join(", ");
 
@@ -10,7 +10,7 @@ const SongCard = ({ song }) => {
   return (
     <div className="bg-gray-700  text-white p-4 rounded-lg w-80">
       <img src={imageUrl} alt={`Album art for ${song.name}`} className="rounded-lg mb-4  " />
-      <h3 className="text-xl font-bold">{song.name}</h3>
+     <span className="flex flex-row text-xl ">Rank: {rank}&nbsp; <h3 className="text-xl font-bold"> {song.name}</h3></span>
       <p className="text-md">Artist: {artistNames}</p>
       <p className="text-md">Album: {song.album.name}</p>
     </div>
