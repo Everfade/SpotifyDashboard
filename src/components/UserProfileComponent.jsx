@@ -1,7 +1,7 @@
 import React from "react";
 
 const UserProfileComponent = ({ userProfile }) => {
-    console.log(userProfile)
+ 
   if (!userProfile) {
     return <div>Loading user profile...</div>;
   }
