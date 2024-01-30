@@ -3,7 +3,9 @@ import { useEffect,useState } from "react";
 import React from "react";
 
 
-useEffect(() => {
+
+const Login = () => {
+  useEffect(() => {
     // Function to extract the token from URL hash
     const getTokenFromUrlHash = (hash) => {
       const stringAfterHash = hash.substring(1); // Remove the '#' character
@@ -29,7 +31,6 @@ useEffect(() => {
       setToken(localToken); // Set token from local storage if it's already there
     }
   }, [])
-const Login = () => {
   const [token,setToken]=useState("")
   const handleLogin = () => {
     // Use environment variables for the client ID and redirect URI

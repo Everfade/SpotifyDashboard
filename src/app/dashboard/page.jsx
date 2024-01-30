@@ -22,7 +22,8 @@ const Dashboard = () => {
             setUserProfile(profile);
           })
           .catch(error => {
-            if (error.response && error.response.status === 401) {
+            console.log(error)
+            if (error.code==401) {
         
               window.localStorage.removeItem("token");  
               setToken("");  
@@ -31,7 +32,8 @@ const Dashboard = () => {
             }
           });
       }
-    } else {
+    }
+     else {
       console.log("Should redirect to login");
       router.push('/login');
     }
@@ -39,22 +41,27 @@ const Dashboard = () => {
   
 
   return (
-    <div className="bg-gray-800 ">
-      <Navbar /> {/* Include the Navbar at the top */}
-      <div className=" ">
-        <h1 className="text-white text-4xl text-center mb-12">Spotify Dashboard</h1>
-        {userProfile && <h2 className="text-white text-4xl text-center mb-12">Welcome, {userProfile.display_name}</h2>}
-        <div className="container mx-auto">
-          {userProfile && (
-            <div className="mb-8">
-              <UserProfileComponent userProfile={userProfile} />
-            </div>
-          )}
-         <TopSongs></TopSongs>
+    <div className="bg-gray-800">
+    <Navbar /> {/* Include the Navbar at the top */}
+    <div className="">
+      <h1 className="text-white text-4xl text-center mb-12">Spotify Dashboard</h1>
+  
+      {/* Conditionally render userProfile related components */}
+      {userProfile && (
+        <div className="flex flex-row  " >
+          <h2 className="text-white p-4  text-4xl text-center  mx-auto ">Welcome, {userProfile.display_name}</h2>
+          <div className=" ">
+           
+          </div>
+        </div>
+      )}
+  
+      <div className="mx-auto container">
+        <TopSongs></TopSongs>
+      </div>
     </div>
-    </div>
-
-    </div>
+  </div>
+  
   );
 };
 

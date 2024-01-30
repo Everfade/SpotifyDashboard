@@ -34,7 +34,8 @@ const Login = () => {
 
   const handleLogin = () => {
     const clientId = "8afc6482aa604bb4a2b0b357bab21ce4";
-    const redirectUri = "http://localhost:3000/login";
+    const redirectUri = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_REDIRECT_URI_PRODUCTION : process.env.NEXT_PUBLIC_REDIRECT_URI_LOCAL;
+    //const redirectUri = "http://localhost:3000/login";
     const scopes = [
       "user-read-private",
       "user-top-read",
