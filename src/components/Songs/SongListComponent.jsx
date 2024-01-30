@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SongCard from "@/components/Songs/SongCard";
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-import ArtistsComponent from "@/app/api/GetArtists";
-import { fetchTopSongs } from "@/app/api/TopSongs";
+ 
  
 const SongListComponent = ({ songs }) => {
   return (

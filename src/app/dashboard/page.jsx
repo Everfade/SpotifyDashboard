@@ -1,12 +1,11 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar"; // Adjust the import path according to your project structure
-import SongListComponent from "@/components/Songs/SongListComponent";
-import UserProfileComponent from "@/components/UserProfileComponent";
-import { fetchUserProfile } from "@/app/api/GetUserData";
+ 
+import { fetchUserProfile } from "@/app/api/userData/page";
+import { fetchTopSongs } from "@/app/api/songs/page";
 import { useRouter } from 'next/navigation';
-
-import { fetchTopSongs } from "@/app/api/TopSongs";
+ 
 import TopSongs from "@/components/Songs/TopSongComponent";
 const Dashboard = () => {
   const router = useRouter()
@@ -15,31 +14,28 @@ const Dashboard = () => {
   useEffect(() => {
     const storedToken = window.localStorage.getItem("token");
     if (storedToken) {
-      setToken(storedToken);
       if (!userProfile) {
         fetchUserProfile(storedToken)
           .then(profile => {
             setUserProfile(profile);
+            // Fetch top songs as well after we have the user profile
+            return fetchTopSongs(storedToken); // Fetching top songs with the storedToken
+          })
+          .then(songs => {
+            setTopSongs(songs); // Set the top songs state
           })
           .catch(error => {
-            console.log(error)
-            if (error.code==401) {
-        
-              window.localStorage.removeItem("token");  
-              setToken("");  
-              console.log("Token is invalid, redirecting to login");
+            console.error(error);
+            if (error.code === 401) {
+              window.localStorage.removeItem("token");
               router.push('/login');
             }
           });
       }
-    }
-     else {
-      console.log("Should redirect to login");
+    } else {
       router.push('/login');
     }
-  }, [router,userProfile]); // Add userProfile to the dependency array if it makes sense in your component logic
-  
-
+  }, [router, userProfile]);
   return (
     <div className="bg-gray-800">
     <Navbar /> {/* Include the Navbar at the top */}

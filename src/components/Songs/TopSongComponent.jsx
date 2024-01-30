@@ -3,8 +3,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import _ from "lodash"; // Import lodash
 import Navbar from "@/components/Navbar";
 import SongListComponent from "@/components/Songs/SongListComponent";
-import UserProfileComponent from "@/components/UserProfileComponent";
-import { fetchUserProfile } from "@/app/api/GetUserData";
+ 
 import { fetchTopSongs } from "@/app/api/TopSongs";
 import CompactSongListViewComponent from "./SongListViewComponent";
 
