@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar"; // Adjust the import path according to your project structure
 import SongListComponent from "@/components/Songs/SongListComponent";
 import UserProfileComponent from "@/components/UserProfileComponent";
-import { fetchUserProfile } from "@/components/dataloaders/GetUserData";
+import { fetchUserProfile } from "@/app/api/GetUserData";
 import { useRouter } from 'next/navigation';
 
-import { fetchTopSongs } from "@/components/dataloaders/TopSongs";
+import { fetchTopSongs } from "@/app/api/TopSongs";
 import TopSongs from "@/components/Songs/TopSongComponent";
 const Dashboard = () => {
   const router = useRouter()
