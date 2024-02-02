@@ -1,11 +1,8 @@
 "use client"
 import React, { useEffect, useState, useCallback } from "react";
 import _ from "lodash"; // Import lodash
-import SongListComponent from "@/components/Songs/SongListComponent";
- 
- 
 import CompactSongListViewComponent from "./SongListViewComponent";
-
+import SongListComponent from "./SongListComponent";
 
 const fetchTopSongs = async (timeRange = 'medium_term', limit = 30) => {
   const token = window.localStorage.getItem("token");
@@ -16,7 +13,7 @@ const fetchTopSongs = async (timeRange = 'medium_term', limit = 30) => {
     const response = await fetch(`/api/songs?time_range=${timeRange}&limit=${limit}`, {
       method: 'GET',
       headers: {
-        'Authorization': "Bearer ${token}",
+        'Authorization': "Bearer "+token,
         'Accept': 'application/json' 
       }
     });

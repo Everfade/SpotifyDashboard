@@ -1,10 +1,9 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "../../components/Navbar";
 import { useRouter } from 'next/navigation';
-
-import TopSongs from "@/components/Songs/TopSongComponent";
-import UserProfileComponent from "@/components/UserProfileComponent";
+import TopSongs from "../../components/Songs/TopSongComponent";
+import UserProfileComponent from "../../components/UserProfileComponent";
 const Dashboard = () => {
   const router = useRouter()
   const [userProfile, setUserProfile] = useState(null);

@@ -1,6 +1,4 @@
-import SongCard from "@/components/Songs/SongCard";
- 
- 
+import SongCard from "./SongCard";
 const SongListComponent = ({ songs }) => {
   return (
     <div>
