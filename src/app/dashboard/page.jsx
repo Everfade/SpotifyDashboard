@@ -1,8 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar"; // Adjust the import path according to your project structure
-
-import { fetchUserProfile } from "@/app/api/user/route";
+import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/navigation';
 
 import TopSongs from "@/components/Songs/TopSongComponent";
@@ -55,7 +53,7 @@ const Dashboard = () => {
           <UserProfileComponent userProfile={userProfile}></UserProfileComponent></div>
 
           </div>
-        {/* Conditionally render userProfile related components */}
+      
         {userProfile && (
           <div className="flex flex-row  " >
         

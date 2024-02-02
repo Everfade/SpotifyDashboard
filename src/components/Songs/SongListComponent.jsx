@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import SongCard from "@/components/Songs/SongCard";
  
  

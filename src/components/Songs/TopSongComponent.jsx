@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState, useCallback } from "react";
 import _ from "lodash"; // Import lodash
-import Navbar from "@/components/Navbar";
 import SongListComponent from "@/components/Songs/SongListComponent";
  
  
