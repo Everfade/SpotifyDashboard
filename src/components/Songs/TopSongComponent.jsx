@@ -3,9 +3,37 @@ import React, { useEffect, useState, useCallback } from "react";
 import _ from "lodash"; // Import lodash
 import Navbar from "@/components/Navbar";
 import SongListComponent from "@/components/Songs/SongListComponent";
-import { fetchTopSongs } from "@/app/api/songs/page";
+ 
  
 import CompactSongListViewComponent from "./SongListViewComponent";
+
+
+const fetchTopSongs = async (timeRange = 'medium_term', limit = 30) => {
+  const token = window.localStorage.getItem("token");
+  if (!token) {
+    throw new Error('No token found');
+  }
+  try {
+    const response = await fetch(`/api/songs?time_range=${timeRange}&limit=${limit}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': "Bearer ${token}",
+        'Accept': 'application/json' 
+      }
+    });
+    if (!response.ok) {
+      throw new Error('Failed to fetch top songs');
+    }
+    const data =  response.json() ;
+    return data;
+  } catch (error) {
+    console.error('Error fetching top songs:', error.message);
+    throw error;  
+  }
+};
+
+
+
 
 const TopSongs = () => {
   const [topSongs, setTopSongs] = useState([]);
@@ -15,21 +43,22 @@ const TopSongs = () => {
   const [timeRange, setTimeRange] = useState("medium_term");
   const [isCompactView, setIsCompactView] = useState(false);
 
-  // Debounce function for setting the song limit
-  const debouncedSetSongLimit = useCallback(_.debounce((newLimit) => {
+    
+   const debouncedSetSongLimit = useCallback(_.debounce((newLimit) => {
     setSongLimit(newLimit);
-  }, 500), []); // 500ms delay
+   }, 500), []); // 500ms delay
 
-  // Debounce function for setting the time range
-  const debouncedSetTimeRange = useCallback(_.debounce((newRange) => {
-    setTimeRange(newRange);
-  }, 500), []); // 500ms delay
+    
+   const debouncedSetTimeRange = useCallback(_.debounce((newRange) => {
+     setTimeRange(newRange);
+   }, 500), []); // 500ms delay
 
   useEffect(() => {
     const storedToken = window.localStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken);
-      fetchTopSongs(storedToken, timeRange, songLimit).then(songs => {
+      fetchTopSongs( timeRange, songLimit).then(songs => {
+        console.log(songs)
         setTopSongs(songs);
       }).catch(error => {
         console.error("Error fetching top songs:", error);
@@ -44,7 +73,7 @@ const TopSongs = () => {
       <div className="container mx-auto">
         <div className="mb-8">
           <h2 className="text-white text-center text-xl lg:text-4xl mb-4 semi-bold" >Your Top Songs</h2>
-          <div className="flex flex-col lg:flex-row p-4">
+          <div className="flex flex-col md:flex-row p-4">
             <div className="flex flex-col mx-auto lg:ml-0">
               <p className="text-white text-md lg:text-xl  mx-auto lg:ml-0">Number of Songs: {songLimit}</p>
               <input
@@ -56,13 +85,13 @@ const TopSongs = () => {
                 className="slider p-4 mr-14  lg:w-64 ml-14 lg:ml-0"
               />
             </div>
-            <div className="sm:text-lg lg:text-xl mx-auto ">
+            <div className="text-md lg:text-xl mx-auto ">
               <select
                 defaultValue={timeRange}
                 onChange={(e) => debouncedSetTimeRange(e.target.value)}
                 className="mb-4 p-2 mt-2 bg-gray-700  text-white"
               >
-                <option value="long_term">Long Term</option>
+                <option className="" value="long_term">Long Term</option>
                 <option value="medium_term">Medium Term</option>
                 <option value="short_term">Short Term</option>
               </select>
