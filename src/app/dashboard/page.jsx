@@ -42,14 +42,14 @@ const Dashboard = () => {
     }
   }, [router, userProfile]);
   return (
-    <div className="bg-gray-800">
-      <Navbar /> {/* Include the Navbar at the top */}
-      <div className="">
-        <div>
-        <h1 className="text-white text-4xl text-center mb-12">Spotify Dashboard</h1>
+    <div className=" bg-gray-800  ">
+     
+     
+        <div className=" ">
+        <h1 className="text-white text-2xl lg:text-4xl text-center py-2 font-medium   mb-4 lg:mb-12">Spotify Dashboard</h1>
 
-        <div className="">
-          <UserProfileComponent userProfile={userProfile}></UserProfileComponent></div>
+        <div className="mx-auto container">
+          <UserProfileComponent  userProfile={userProfile}></UserProfileComponent></div>
 
           </div>
       
@@ -65,7 +65,7 @@ const Dashboard = () => {
         <div className="mx-auto container">
           <TopSongs></TopSongs>
         </div>
-      </div>
+      
     </div>
 
   );

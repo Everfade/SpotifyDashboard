@@ -8,7 +8,7 @@ const Login = () => {
     const hash = window.location.hash
     let token = window.localStorage.getItem("token")
 
-    // getToken()
+ 
 
 
     if (!token && hash) {
@@ -30,7 +30,7 @@ const Login = () => {
     else{
       router.push("/dashboard");
     }
-  }, [token]); // This effect depends on the `token` state
+  }, [token]);  
 
   const handleLogin = () => {
     const clientId = "8afc6482aa604bb4a2b0b357bab21ce4";
@@ -40,10 +40,10 @@ const Login = () => {
       "user-read-private",
       "user-top-read",
       "user-read-email",
-      // Add other scopes as needed
+   
     ];
 
-    // Redirect to Spotify login page
+  
     window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes.join(" "))}&response_type=token&show_dialog=true`;
   };
 

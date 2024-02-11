@@ -42,12 +42,12 @@ const TopSongs = () => {
     
    const debouncedSetSongLimit = useCallback(_.debounce((newLimit) => {
     setSongLimit(newLimit);
-   }, 500), []); // 500ms delay
+   }, 500), []);  
 
     
    const debouncedSetTimeRange = useCallback(_.debounce((newRange) => {
      setTimeRange(newRange);
-   }, 500), []); // 500ms delay
+   }, 500), []);   
 
   useEffect(() => {
     const storedToken = window.localStorage.getItem("token");
@@ -65,12 +65,14 @@ const TopSongs = () => {
   }, [songLimit, timeRange]);
 
   return (
-    <div className="bg-gray-800">
+    <div className="bg-gray-800 mt-4 ">
+                <h2 className="text-white text-center text-xl lg:text-4xl mb-4 semi-bold lg:float-left p-4   " >Your Top Songs</h2>
       <div className="container mx-auto">
         <div className="mb-8">
-          <h2 className="text-white text-center text-xl lg:text-4xl mb-4 semi-bold" >Your Top Songs</h2>
-          <div className="flex flex-col md:flex-row p-4">
-            <div className="flex flex-col mx-auto lg:ml-0">
+
+         
+          <div className="flex flex-col lg:mt-20 md:flex-row p-4">
+            <div className="flex flex-col mx-auto lg:t-10 lg:ml-0">
               <p className="text-white text-md lg:text-xl  mx-auto lg:ml-0">Number of Songs: {songLimit}</p>
               <input
                 type="range"
@@ -81,27 +83,29 @@ const TopSongs = () => {
                 className="slider p-4 mr-14  lg:w-64 ml-14 lg:ml-0"
               />
             </div>
-            <div className="text-md lg:text-xl mx-auto ">
+            <div className="text-md lg:text-xl mx-auto flex flex-row">
               <select
                 defaultValue={timeRange}
                 onChange={(e) => debouncedSetTimeRange(e.target.value)}
-                className="mb-4 p-2 mt-2 bg-gray-700  text-white"
+                className="mb-4 p-2 mt-2 bg-gray-700 text-md text-white"
               >
                 <option className="" value="long_term">Long Term</option>
                 <option value="medium_term">Medium Term</option>
                 <option value="short_term">Short Term</option>
               </select>
-            </div>
-            <div className="flex justify-center ml-8 mb-4">
+              <div className="flex justify-center ml-8 mb-4">
+              <div className="ml-2 text-gray-200 pt-2 mr-2 text-md lg:mt-2 lg:text-xl">Compact</div>
             <label className="flex items-center cursor-pointer">
               <div className="relative">
                 <input type="checkbox" id="compactViewToggle" className="sr-only" checked={isCompactView} onChange={() => setIsCompactView(!isCompactView)} />
                 <div className="block bg-gray-600 w-14 h-8 rounded-full"></div>
                 <div className={`dot absolute top-1 bg-white w-6 h-6 rounded-full transition ${isCompactView ? "transform translate-x-6" : "left-1"}`}></div>
               </div>
-              <div className="ml-3 text-gray-200 text-md lg:text-xl">Compact View</div>
+            
             </label>
           </div>
+            </div>
+      
 
           </div>
           {isCompactView ? (

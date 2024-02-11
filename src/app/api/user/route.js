@@ -11,7 +11,7 @@ async function GET(req) {
   }
 
   try {
-    // Set default values if not provided
+    
     const spotifyUrl = "https://api.spotify.com/v1/me";
     console.log("Spotify API URL:", spotifyUrl.toString());
 
